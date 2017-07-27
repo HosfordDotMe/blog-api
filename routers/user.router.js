@@ -19,7 +19,13 @@ router.get('/users/:userId', (req, res) => {
     });
 });
 router.post('/users', (req, res) => {
+    if(!req.body.password) {
+        return res.status(400).json ({
+            msg: 'Bad Request'
+        });
+    }
     const newUser = new User(req.body);
+    newUser.setPassword(req.body.password);
     newUser.save(function(err, user){
         if(err) return res.status(500).json({err: err});
         return res.status(201).json({
