@@ -17,8 +17,11 @@ const postSchema = new Schema ({
     },
     user: {
         //needs to be objectid
-        type: Object, 
+        type: Schema.Types.ObjectId, 
         required: true
         //get userId from logged in user
     }
-})
+});
+
+const Post = mongoose.model('Post', postSchema);
+module.exports = Post;
